@@ -45,7 +45,7 @@ class Route
 
     protected static function processUrl($url, $method, $controller)
     {
-        self::${$method}[$url !== '/' ? trim($url, '/') : '/'] = self::processControllerMethod($controller);
+        self::${$method}[$url !== '/' ? ltrim($url, '/') : '/'] = self::processControllerMethod($controller);
     }
 
     protected static function processControllerMethod($controller)

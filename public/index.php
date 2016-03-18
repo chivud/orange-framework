@@ -12,3 +12,5 @@ $kernel = new Kernel($request);
 require_once '../src/route.php';
 
 $kernel->dispatch();
+
+//print_r(\Core\Route\Route::getRegisteredRoutes());
