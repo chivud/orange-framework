@@ -1,8 +1,8 @@
 {
   "autoload":{
-    "classmap": ["src/", "core/"],
+    "classmap": ["src/app/", "core/"],
     "psr-0":{
-      "App": "src/",
+      "App": "src/app/",
       "Core": "core/"
     }
   }

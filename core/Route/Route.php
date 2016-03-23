@@ -43,12 +43,12 @@ class Route
         self::processUrl($url, 'delete', $controller);
     }
 
-    protected static function processUrl($url, $method, $controller)
+    private static function processUrl($url, $method, $controller)
     {
         self::${$method}[$url !== '/' ? ltrim($url, '/') : '/'] = self::processControllerMethod($controller);
     }
 
-    protected static function processControllerMethod($controller)
+    private static function processControllerMethod($controller)
     {
         $explodedController = explode('@', $controller);
 
@@ -62,7 +62,8 @@ class Route
         throw new InvalidRouteException('Route ' . $controller . ' is invalid');
     }
 
-    public static function getRegisteredRoutes(){
+    public function getRegisteredRoutes()
+    {
         return [
             'get' => self::$get,
             'post' => self::$post,
@@ -70,5 +71,14 @@ class Route
             'patch' => self::$patch,
             'delete' => self::$delete,
         ];
+    }
+
+    public function getRoute($httpVerb, $path)
+    {
+        if (property_exists($this, strtolower($httpVerb))) {
+            return isset(self::${strtolower($httpVerb)}[$path]) ? self::${strtolower($httpVerb)}[$path] : null;
+        }
+
+        return null;
     }
 }
