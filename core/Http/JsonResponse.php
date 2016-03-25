@@ -3,18 +3,18 @@
 namespace Core\Http;
 
 
-class JsonResponse implements ResponseInterface
+class JsonResponse extends AbstractResponse
 {
 
-    protected $response;
-
-    public function __construct($response = null)
+    public function getResponse()
     {
-        $this->response = json_encode($response);
+
+        return json_encode($this->response);
     }
 
-    public function returnResponse()
+    protected function preSendOperations()
     {
-        return $this->response;
+        $this->headers[] = 'Content-Type: application/json';
     }
+
 }

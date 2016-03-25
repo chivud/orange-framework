@@ -3,18 +3,12 @@
 namespace Core\Http;
 
 
-class Response implements ResponseInterface
+class Response extends AbstractResponse
 {
 
-    protected $response;
-
-    public function __construct($response = null)
-    {
-        $this->response = $response;
-    }
-
-    public function returnResponse()
+    public function getResponse()
     {
         return $this->response;
     }
+    
 }

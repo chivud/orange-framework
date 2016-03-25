@@ -6,7 +6,11 @@ namespace Core\Http;
 
 interface RequestInterface
 {
-    public function get();
+    public function query();
 
-    public function post();
+    public function input();
+
+    public function requestMethod();
+
+    public function requestPath();
 }

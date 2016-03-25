@@ -12,9 +12,9 @@ class Request implements RequestInterface
 
     protected $files;
 
-    public $path;
+    protected $path;
 
-    public $method;
+    protected $method;
 
     /**
      * Initialize request object with request variables
@@ -32,7 +32,7 @@ class Request implements RequestInterface
      * @param mixed $key
      * @return mixed
      */
-    public function get($key = null)
+    public function query($key = null)
     {
         if ($key) {
             return isset($this->query[$key]) ? $this->query[$key] : null;
@@ -45,13 +45,23 @@ class Request implements RequestInterface
      * @param mixed $key
      * @return mixed
      */
-    public function post($key = null)
+    public function input($key = null)
     {
         if ($key) {
             return isset($this->params[$key]) ? $this->params[$key] : null;
         }
 
         return $this->params;
+    }
+
+    public function requestMethod()
+    {
+        return $this->method;
+    }
+
+    public function requestPath()
+    {
+        return $this->path;
     }
 
 }

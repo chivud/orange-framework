@@ -3,10 +3,14 @@
 namespace App\Controllers;
 
 
-class Example
+use Core\Controller\Controller;
+use Core\Http\JsonResponse;
+use Core\Http\Response;
+
+class Example extends Controller
 {
     public function index()
     {
-        print_r('it works!');
+        return new JsonResponse(['test']);
     }
 }

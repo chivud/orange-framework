@@ -1,44 +1,39 @@
 <?php
 namespace Core;
 
+use Core\Exceptions\InvalidResponseException;
 use Core\Http\RequestInterface;
+use Core\Http\ResponseInterface;
+use Core\Route\Dispatcher;
 use Core\Route\Route;
 use Core\Exceptions\RouteNotExistsException;
 use Core\Services\Config;
 
 class Kernel
 {
-    const BASE_NAMESPACE = 'App\Controllers\\';
 
     protected $request;
     protected $route;
+    protected $dispatcher;
 
-    public function __construct(RequestInterface $request, Route $route)
+    public function __construct(RequestInterface $request, Route $route, Dispatcher $dispatcher)
     {
         $this->request = $request;
         $this->route = $route;
+        $this->dispatcher = $dispatcher;
     }
 
     public function dispatch()
     {
-        $path = $this->route->getRoute($this->request->method, $this->request->path);
-        if (!$path) {
-            throw new RouteNotExistsException($this->request->method . ' ' . $this->request->path . ' resource does not exists.');
+        $response = $this->dispatcher->execute($this->request, $this->route);
+
+        if (!is_object($response) || !$response instanceof ResponseInterface) {
+            throw new InvalidResponseException('Invalid response. You must always return a ResponseInterface object from the controller');
         }
 
-        $className = self::BASE_NAMESPACE . $path['controller'];
-        if(class_exists($className)){
-            $response = $this->runMethod($className, $path['method']);
-        }
+        $response->send();
+
     }
 
-    private function runMethod($className, $method)
-    {
-        $requestedClass = new $className;
-
-        if (method_exists($requestedClass, $method) && is_callable([$requestedClass, $method])) {
-            return $requestedClass->{$method}();
-        }
-    }
 
 }

@@ -6,8 +6,11 @@ require '../vendor/autoload.php';
 use Core\Kernel;
 use Core\Http\Request;
 
-$request = new Request();
-$kernel = new Kernel($request, new \Core\Route\Route());
+$kernel = new Kernel(
+    new Request(),
+    new \Core\Route\Route(),
+    new \Core\Route\Dispatcher()
+);
 
 require_once '../src/route.php';
 
