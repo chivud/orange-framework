@@ -1,3 +1,3 @@
-# Orange Framework ver 0.1.0
+# Orange Framework v0.2-alpha
 
 This is a basic framework.
