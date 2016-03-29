@@ -5,11 +5,36 @@ namespace Core\Http;
 
 abstract class AbstractResponse implements ResponseInterface
 {
+    /**
+     * Response data.
+     * @var mixed
+     */
     protected $response;
+
+    /**
+     * HTTP status code
+     * @var int
+     */
     protected $statusCode;
+
+    /**
+     * HTTP status string
+     * @var string
+     */
     protected $statusText;
+
+    /**
+     * Headers
+     * @var array
+     */
     protected $headers;
 
+    /**
+     * Construct the response with all necessary data
+     * @param mixed $response
+     * @param int $statusCode
+     * @param string $statusText
+     */
     public function __construct($response = null, $statusCode = 200, $statusText = 'OK')
     {
         $this->response = $response;
@@ -17,7 +42,10 @@ abstract class AbstractResponse implements ResponseInterface
         $this->statusText = $statusText;
     }
 
-
+    /**
+     * Send the response to the client
+     * @return $this
+     */
     public function send()
     {
 
@@ -32,10 +60,19 @@ abstract class AbstractResponse implements ResponseInterface
         return $this;
     }
 
+    /**
+     * This is the container for all operations that are done before
+     * sending data to the client.
+     * @return mixed
+     */
     protected function preSendOperations(){
         return null;
     }
 
+    /**
+     * Send headers to the client
+     * @return $this
+     */
     private function setHeaders()
     {
         if (headers_sent()) {
@@ -55,6 +92,10 @@ abstract class AbstractResponse implements ResponseInterface
 
     }
 
+    /**
+     * Echo the response to the client
+     * @return $this
+     */
     private function sendContent()
     {
         echo $this->getResponse();

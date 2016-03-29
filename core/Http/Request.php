@@ -6,14 +6,34 @@ namespace Core\Http;
 class Request implements RequestInterface
 {
 
+    /**
+     * GET params
+     * @var array
+     */
     protected $query;
 
+    /**
+     * POST Params
+     * @var array
+     */
     protected $params;
 
+    /**
+     * FILES params
+     * @var array
+     */
     protected $files;
 
+    /**
+     * Request path
+     * @var string
+     */
     protected $path;
 
+    /**
+     * Request method
+     * @var string
+     */
     protected $method;
 
     /**
@@ -54,11 +74,19 @@ class Request implements RequestInterface
         return $this->params;
     }
 
+    /**
+     * Return the HTTP request method
+     * @return string
+     */
     public function requestMethod()
     {
         return $this->method;
     }
 
+    /**
+     * Return HTTP request path
+     * @return string
+     */
     public function requestPath()
     {
         return $this->path;
