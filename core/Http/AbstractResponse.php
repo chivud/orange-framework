@@ -2,7 +2,6 @@
 
 namespace Core\Http;
 
-
 abstract class AbstractResponse implements ResponseInterface
 {
     /**
@@ -65,7 +64,8 @@ abstract class AbstractResponse implements ResponseInterface
      * sending data to the client.
      * @return mixed
      */
-    protected function preSendOperations(){
+    protected function preSendOperations()
+    {
         return null;
     }
 

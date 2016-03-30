@@ -60,21 +60,22 @@ class Controller
         return new Response($html);
     }
 
-    protected function view($view, array $params = []){
+    protected function view($view, array $params = [])
+    {
 
         $basePath = Config::get('app.view_path');
 
         $explodedView = explode('.', $view);
 
-        if(count($explodedView) > 1){
+        if (count($explodedView) > 1) {
 
             $viewPage = $basePath . $explodedView[0] . '/' . $explodedView[1] . '.php';
-        }else{
+        } else {
             $viewPage = $basePath . $explodedView[0] . '.php';
         }
 
         ob_start();
-        if(!empty($params)){
+        if (!empty($params)) {
             extract($params);
         }
         include $viewPage;
@@ -90,15 +91,16 @@ class Controller
     {
         $model = self::BASE_MODEL_NAMESPACE . ucwords($name);
 
-        if(class_exists($model)){
+        if (class_exists($model)) {
             $dbClass = $this->getDatabaseClass();
-            return new $model(new $dbClass() );
+            return new $model(new $dbClass());
         }
 
         throw new ModelNotExistsException('Model ' . $model . ' does not exists in namespace ' . self::BASE_MODEL_NAMESPACE);
     }
 
-    private function getDatabaseClass(){
+    private function getDatabaseClass()
+    {
         return self::DATABASE_CLASS;
     }
 }

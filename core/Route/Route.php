@@ -3,7 +3,6 @@
 
 namespace Core\Route;
 
-
 use Core\Exceptions\InvalidRouteException;
 
 class Route

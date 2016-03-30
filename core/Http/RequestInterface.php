@@ -3,7 +3,6 @@
 
 namespace Core\Http;
 
-
 interface RequestInterface
 {
     public function query();

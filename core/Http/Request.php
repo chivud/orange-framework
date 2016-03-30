@@ -2,7 +2,6 @@
 
 namespace Core\Http;
 
-
 class Request implements RequestInterface
 {
 
@@ -91,5 +90,4 @@ class Request implements RequestInterface
     {
         return $this->path;
     }
-
 }

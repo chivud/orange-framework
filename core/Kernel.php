@@ -58,6 +58,4 @@ class Kernel
         $response->send();
 
     }
-
-
 }

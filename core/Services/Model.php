@@ -15,9 +15,10 @@ class Model
         $this->db = $connection::getInstance();
     }
 
-    protected function find($id, $columns = []){
+    protected function find($id, $columns = [])
+    {
         $select = '*';
-        if(!empty($columns)){
+        if (!empty($columns)) {
             $select = implode(',', $columns);
         }
         $stmt = $this->db->prepare("SELECT $select FROM {$this->table} WHERE id= :id");

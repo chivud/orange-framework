@@ -2,7 +2,6 @@
 
 namespace Core\Database;
 
-
 use Core\Services\Config;
 
 class PDOConnection implements ConnectionInterface

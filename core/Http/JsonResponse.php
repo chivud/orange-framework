@@ -2,7 +2,6 @@
 
 namespace Core\Http;
 
-
 class JsonResponse extends AbstractResponse
 {
 
@@ -16,5 +15,4 @@ class JsonResponse extends AbstractResponse
     {
         $this->headers[] = 'Content-Type: application/json';
     }
-
 }

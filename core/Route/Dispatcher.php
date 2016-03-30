@@ -2,7 +2,6 @@
 
 namespace Core\Route;
 
-
 use Core\Exceptions\RouteNotExistsException;
 use Core\Http\RequestInterface;
 
@@ -37,5 +36,4 @@ class Dispatcher
 
         return null;
     }
-
 }

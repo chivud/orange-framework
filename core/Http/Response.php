@@ -2,7 +2,6 @@
 
 namespace Core\Http;
 
-
 class Response extends AbstractResponse
 {
 
@@ -10,5 +9,4 @@ class Response extends AbstractResponse
     {
         return $this->response;
     }
-    
 }

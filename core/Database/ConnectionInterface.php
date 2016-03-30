@@ -3,7 +3,6 @@
 
 namespace Core\Database;
 
-
 interface ConnectionInterface
 {
     public function create();
