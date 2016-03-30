@@ -10,7 +10,7 @@ use Core\Services\Config;
 
 /**
  * This is the base controller class.
- * All controllers must extend this class in order to have access to the request data
+ * All controllers must extend this class
  * @package Core\Controller
  */
 class Controller
