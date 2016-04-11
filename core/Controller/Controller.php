@@ -25,6 +25,7 @@ class Controller
     /**
      * Controller constructor.
      * @param RequestInterface $request
+     * @internal param ViewRender $viewRender
      */
     public function __construct(RequestInterface $request)
     {
@@ -60,33 +61,21 @@ class Controller
         return new Response($html);
     }
 
+    /**
+     * @param $view
+     * @param array $params
+     * @return Response
+     */
     protected function view($view, array $params = [])
     {
-        $basePath = Config::get('app.view_path');
-
-        $explodedView = explode('.', $view);
-
-        if (count($explodedView) > 1) {
-
-            $viewPage = $basePath . $explodedView[0] . '/' . $explodedView[1] . '.php';
-        } else {
-            $viewPage = $basePath . $explodedView[0] . '.php';
-        }
-
-        ob_start();
-        if (!empty($params)) {
-            extract($params);
-        }
-
-        include $viewPage;
-
-        $html = ob_get_contents();
-
-        ob_end_clean();
-
-        return $this->htmlResponse($html);
+        return $this->htmlResponse(ViewRender::render($view, $params));
     }
 
+    /**
+     * @param $name
+     * @return mixed
+     * @throws ModelNotExistsException
+     */
     protected function model($name)
     {
         $model = self::BASE_MODEL_NAMESPACE . ucwords($name);
@@ -99,6 +88,9 @@ class Controller
         throw new ModelNotExistsException('Model ' . $model . ' does not exists in namespace ' . self::BASE_MODEL_NAMESPACE);
     }
 
+    /**
+     * @return string
+     */
     private function getDatabaseClass()
     {
         return self::DATABASE_CLASS;
