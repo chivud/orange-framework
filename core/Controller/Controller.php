@@ -62,7 +62,6 @@ class Controller
 
     protected function view($view, array $params = [])
     {
-
         $basePath = Config::get('app.view_path');
 
         $explodedView = explode('.', $view);
@@ -78,6 +77,7 @@ class Controller
         if (!empty($params)) {
             extract($params);
         }
+
         include $viewPage;
 
         $html = ob_get_contents();

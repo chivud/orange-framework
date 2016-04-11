@@ -74,10 +74,30 @@ class Route
 
     public function getRoute($httpVerb, $path)
     {
+        $path = $this->processRequestedPath($path);
+
         if (property_exists($this, strtolower($httpVerb))) {
             return isset(self::${strtolower($httpVerb)}[$path]) ? self::${strtolower($httpVerb)}[$path] : null;
         }
 
         return null;
+    }
+
+    private function processRequestedPath($path)
+    {
+        if ($path != '/') {
+            $path = ltrim($path, '/');
+        }
+        $position = strpos($path, '?');
+
+        if ($position !== false) {
+            $path = substr($path, 0, $position);
+        }
+
+        if($path == ''){
+            $path = '/';
+        }
+
+        return $path;
     }
 }

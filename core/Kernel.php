@@ -49,6 +49,7 @@ class Kernel
      */
     public function dispatch()
     {
+
         $response = $this->dispatcher->execute($this->request, $this->route);
 
         if (!is_object($response) || !$response instanceof ResponseInterface) {

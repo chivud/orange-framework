@@ -6,6 +6,7 @@ use Core\Services\Config;
 
 class PDOConnection implements ConnectionInterface
 {
+    
     protected static $instance;
 
     public function __construct()

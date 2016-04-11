@@ -4,6 +4,7 @@ namespace Core\Route;
 
 use Core\Exceptions\RouteNotExistsException;
 use Core\Http\RequestInterface;
+use Core\Exceptions\ControllerNotExistsException;
 
 class Dispatcher
 {
@@ -14,6 +15,7 @@ class Dispatcher
         $response = null;
 
         $path = $route->getRoute($request->requestMethod(), $request->requestPath());
+        
         if (!$path) {
             throw new RouteNotExistsException($request->requestMethod() . ' ' . $request->requestPath() . ' resource does not exists.');
         }
@@ -21,6 +23,8 @@ class Dispatcher
         $className = self::BASE_NAMESPACE . $path['controller'];
         if (class_exists($className)) {
             $response = $this->runMethod($className, $path['method'], $request);
+        }else{
+            throw new ControllerNotExistsException('Controller ' . $className . ' does not exists.');
         }
 
         return $response;
