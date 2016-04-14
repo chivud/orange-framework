@@ -11,11 +11,28 @@
 <div class="container">
     <h1>Install Orange Framework</h1>
     <ul>
-        <?php if (isset($entities) && !empty($entities)): ?>
-            <?php foreach ($entities as $entity): ?>
-                <li><?php echo $entity ?></li>
-            <?php endforeach; ?>
-        <?php endif; ?>
+
+        <table class="table">
+            <tr>
+                <th>Create?</th>
+                <th>Table name</th>
+                <th>Entity name</th>
+            </tr>
+            <?php if (isset($entities) && !empty($entities)): ?>
+                <?php foreach ($entities as $entity): ?>
+                    <tr>
+                        <td><input type="checkbox" name="create[]" checked value="<?php echo $entity ?>"></td>
+                        <td><?php echo $entity ?></td>
+                        <td>
+                            <input type="text" class="form-control" id="<?php echo $entity ?>"
+                                   value="<?php echo str_replace(' ', '',
+                                       ucwords(preg_replace('/_|s$/', ' ', $entity))) ?>">
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            <?php endif; ?>
+            <tr></tr>
+        </table>
     </ul>
 </div>
 

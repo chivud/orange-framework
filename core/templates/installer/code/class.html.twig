@@ -1,0 +1,16 @@
+{% autoescape false %}
+<?php
+
+namespace {{ class.namespace }};
+
+{% for use in uses %}
+use {{ use }}
+{% endfor %}
+
+class {{ class.name }} {{ class.extends ? 'extends ' . class.extends : '' }}
+{
+{% for method in class.methods %}
+{{ method }}
+{% endfor %}
+}
+{% endautoescape %}

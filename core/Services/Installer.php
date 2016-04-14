@@ -14,17 +14,30 @@ class Installer
      */
     private $connection;
 
+    private $codeGenerator;
 
-    public function __construct(ConnectionInterface $connection)
+
+    public function __construct(ConnectionInterface $connection, CodeGenerator $codeGenerator)
     {
         $this->connection = $connection::getInstance();
+        $this->codeGenerator = $codeGenerator;
     }
 
-    public function execute()
+    public function index()
     {
         $entities = $this->getEntities();
 
         $this->getHomeTemplate(['entities' => $entities], self::VIEWS_PATH);
+
+    }
+
+    public function execute($input)
+    {
+        $parsedInputs = $input;
+
+        foreach ($parsedInputs as $entity){
+            $this->codeGenerator->generateEntity($entity['name'], $entity['namespace'], $entity['location']);
+        }
 
     }
 
